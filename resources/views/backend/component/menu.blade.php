@@ -26,6 +26,25 @@
                 </li>
             </ul>
         </li>
+         {{-- sub category  --}}
+         <li>
+            <a href="#categories">
+                <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+                <span class="label">Sub Category</span>
+            </a>
+            <ul id="categories">
+                <li>
+                    <a href="{{route('sub-category.index')}}">
+                        <span class="label">All sub category</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('sub-category.create')}}">
+                        <span class="label">Create sub category</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
 </div>
