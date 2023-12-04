@@ -57,17 +57,17 @@
                                         <td>{{ $item->name }}</td>
                                         <td>{{ $item->slug }}</td>
                                         <td>
-                                            <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
-                                                    href="{{ route('category.edit', $item->slug) }}"
-                                                    class="text-white">Edit</a></button>
+                                            <span style="display: inline-block"><button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
+                                                href="{{ route('category.edit', $item->slug) }}"
+                                                class="text-white">Edit</a></button></span>
 
-                                            <form action="{{ route('category.destroy', $item->slug) }}" method="post"
+                                            <span style="display: inline-block"><form action="{{ route('category.destroy', $item->slug) }}" method="post"
                                                 id="deleteForm" >
                                                 @csrf
                                                 @method('DELETE')
                                                 <button class="btn btn-danger" id="delete"><i
                                                     class="fa-solid fa-trash"></i> <a href="" class="text-white">Delete</a></button>
-                                            </form>
+                                            </form></span>
                                         </td>
                                     </tr>
                                 @endforeach
