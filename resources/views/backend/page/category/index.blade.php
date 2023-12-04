@@ -41,7 +41,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">SL no</th>
-                                    <th scope="col">Last modified</th>
+                                    <th scope="col">Last update</th>
                                     <th scope="col">Image</th>
                                     <th scope="col">Title</th>
                                     <th scope="col">slug</th>
@@ -53,8 +53,8 @@
                                     <tr>
                                         <th>{{ $key + 1 }}</th>
                                         <td>{{ $item->updated_at->format('d M Y') }}</td>
-                                        <td><img src="{{asset($item->category_image)}}" alt="" width="100"></td>
-                                        <td>{{ $item->title }}</td>
+                                        <td><img src="{{asset($item->image)}}" alt="" width="100"></td>
+                                        <td>{{ $item->name }}</td>
                                         <td>{{ $item->slug }}</td>
                                         <td>
                                             <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a

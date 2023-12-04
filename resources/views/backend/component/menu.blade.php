@@ -15,35 +15,17 @@
             </a>
             <ul id="categories">
                 <li>
-                    <a href="">
+                    <a href="{{route('category.index')}}">
                         <span class="label">All category</span>
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="{{route('category.create')}}">
                         <span class="label">Create category</span>
                     </a>
                 </li>
             </ul>
         </li>
-         {{-- category  --}}
-         <li>
-            <a href="#product">
-                <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
-                <span class="label">product</span>
-            </a>
-            <ul id="product">
-                <li>
-                    <a href="">
-                        <span class="label">All category</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="label">Create category</span>
-                    </a>
-                </li>
-            </ul>
-        </li>
+
     </ul>
 </div>

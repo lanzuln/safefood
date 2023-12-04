@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\Backend;
 
-use Exception;
-use App\Models\Category;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Models\Category;
+use Exception;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Intervention\Image\Facades\Image;
 
 class CategoryController extends Controller {
@@ -29,29 +30,27 @@ class CategoryController extends Controller {
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request) {
-        $request->validate([
-            'title' => "required|string|max:50|unique:categories,title",
-        ]);
-        if ($request->hasFile('category_image')) {
+    public function store(StoreCategoryRequest $request) {
 
-            $file = request()->file('category_image');
-            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            Image::make($file)->resize(300, 280)->save(public_path('/uploads/category/' . $fileName));
+        if ($request->hasFile('image')) {
+
+            $file = request()->file('image');
+            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension(); //for name making
+            $file->move(public_path('/uploads/category'), $fileName);
             $filePath = "uploads/category/{$fileName}";
 
             Category::create([
-                'title' => $request->title,
-                'slug' => Str::slug($request->title),
-                'category_image' => $filePath,
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'image' => $filePath,
             ]);
 
             toastr()->success('Category created with image');
             return redirect()->route('category.index');
         }
         Category::create([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
         ]);
         toastr()->success('Category created without image');
         return redirect()->route('category.index');
@@ -90,7 +89,7 @@ class CategoryController extends Controller {
             }
             $file = request()->file('category_image');
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-             Image::make($file)->resize(300, 280)->save(public_path('/uploads/category/' . $fileName));
+            Image::make($file)->resize(300, 280)->save(public_path('/uploads/category/' . $fileName));
             $filePath = "uploads/category/{$fileName}";
 
             Category::where('slug', $slug)->update([
@@ -124,8 +123,7 @@ class CategoryController extends Controller {
 
         try {
 
-            $category =  Category::where('slug', $slug)->first();
-
+            $category = Category::where('slug', $slug)->first();
 
             $oldImagePath = public_path($category->category_image); // Get the full path to the old image
 
@@ -140,7 +138,7 @@ class CategoryController extends Controller {
             return redirect()->route('category.index');
 
         } catch (Exception $e) {
-        return "something went wrong";
+            return "something went wrong";
+        }
     }
-}
 }
