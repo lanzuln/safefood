@@ -31,10 +31,20 @@
             <div class="col-12 mb-5">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('category.store') }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('sub-category.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <div class="form-group">
+                                <select class="form-select mb-3" aria-label="Default select example" name="category_id">
+                                    <option selected="">Select category</option>
+
+                                    @foreach ($allCategory as $item)
+                                        <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    @endforeach
+
+                                </select>
+                            </div>
                             <div class="mb-3">
-                                <label class="form-label">Category name</label>
+                                <label class="form-label">Sub Category name</label>
                                 <input type="text" name="name"
                                     class="form-control @error('name') is-invalid @enderror" value="" id="">
                                 @error('name')
@@ -44,7 +54,7 @@
                             {{-- category image	 --}}
 
                             <div class="mb-3">
-                                <label class="form-label">Category image</label>
+                                <label class="form-label">Sub Category image</label>
                                 <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])" class="form-control"
                                 name="image" type="file" id="image">
                             </div>
