@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreCategoryRequest;
-use App\Models\Category;
 use Exception;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\File;
+use App\Models\Category;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
 use Intervention\Image\Facades\Image;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 
 class CategoryController extends Controller {
     /**
@@ -77,26 +78,29 @@ class CategoryController extends Controller {
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $slug) {
-        $request->validate([
-            'title' => "required|string|max:50",
-        ]);
-        // dd($request);
+    public function update(UpdateCategoryRequest $request, string $slug) {
+
+
         $category = Category::find('slug');
-        if ($request->hasFile('category_image')) {
-            if ($category && File::exists(public_path($category->category_image))) {
-                File::delete(public_path($category->category_image));
+        if ($request->hasFile('image')) {
+
+            // delete previues file path
+            if ($category && File::exists(public_path($category->image))) {
+                File::delete(public_path($category->image));
             }
-            $file = request()->file('category_image');
-            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension();
-            Image::make($file)->resize(300, 280)->save(public_path('/uploads/category/' . $fileName));
+
+
+            $file = request()->file('image');
+            $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension(); //for name making
+            $file->move(public_path('/uploads/category'), $fileName);
             $filePath = "uploads/category/{$fileName}";
 
+
+
             Category::where('slug', $slug)->update([
-                'title' => $request->title,
-                'slug' => Str::slug($request->title),
-                'category_image' => $filePath,
-                'is_active' => $request->filled('is_active'),
+                'name' => $request->name,
+                'slug' => Str::slug($request->name),
+                'image' => $filePath,
             ]);
 
             toastr()->success('Category updated with image');
@@ -105,9 +109,8 @@ class CategoryController extends Controller {
         }
 
         Category::where('slug', $slug)->update([
-            'title' => $request->title,
-            'slug' => Str::slug($request->title),
-            'is_active' => $request->filled('is_active'),
+            'name' => $request->name,
+            'slug' => Str::slug($request->name),
 
         ]);
 
@@ -125,7 +128,7 @@ class CategoryController extends Controller {
 
             $category = Category::where('slug', $slug)->first();
 
-            $oldImagePath = public_path($category->category_image); // Get the full path to the old image
+            $oldImagePath = public_path($category->image); // Get the full path to the old image
 
             if (file_exists($oldImagePath)) {
                 // Delete the old image
