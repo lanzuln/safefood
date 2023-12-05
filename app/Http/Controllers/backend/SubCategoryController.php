@@ -2,18 +2,18 @@
 
 namespace App\Http\Controllers\Backend;
 
-use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreSubCategoryRequest;
-use App\Http\Requests\UpdateSubCategoryRequest;
+use Exception;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\File;
+use App\Http\Requests\StoreSubCategoryRequest;
+use App\Http\Requests\UpdateSubCategoryRequest;
 
 class SubCategoryController extends Controller {public function index() {
 
     $sub_categories = SubCategory::latest()->get();
-    // dd($sub_categories);
-
     return view('backend.page.sub-category.index', compact('sub_categories'));
 }
 
@@ -21,7 +21,6 @@ class SubCategoryController extends Controller {public function index() {
  * Show the form for creating a new resource.
  */
     public function create() {
-        // $allCategory= Category::orderBy('category_name', 'ASC')->get();
         $allCategory = Category::latest()->get();
         return view('backend.page.sub-category.create', compact('allCategory'));
     }
@@ -35,8 +34,8 @@ class SubCategoryController extends Controller {public function index() {
 
             $file = request()->file('image');
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension(); //for name making
-            $file->move(public_path('/uploads/category'), $fileName);
-            $filePath = "uploads/category/{$fileName}";
+            $file->move(public_path('/uploads/subCategory/'), $fileName);
+            $filePath = "uploads/subCategory/{$fileName}";
 
             SubCategory::create([
                 'name' => $request->name,
@@ -70,50 +69,56 @@ class SubCategoryController extends Controller {public function index() {
  * Show the form for editing the specified resource.
  */
     public function edit(string $slug) {
-        $category = Category::where('slug', $slug)->first();
+        $allCategory = Category::latest()->get();
+        $sub_category = SubCategory::where('slug', $slug)->first();
 
-        return view('backend.page.category.edit', compact('category'));
+        return view('backend.page.sub-category.edit', compact('allCategory','sub_category'));
 
     }
 
 /**
  * Update the specified resource in storage.
  */
-    public function update(UpdateSubCategoryRequest $request, string $slug) {
+    public function update(UpdateSubCategoryRequest $request, $slug) {
 
-        $category = Category::find('slug');
+        $sub_category = SubCategory::whereSlug($slug)->first();
+        // dd($sub_category);
+
         if ($request->hasFile('image')) {
 
             // delete previues file path
-            if ($category && File::exists(public_path($category->image))) {
-                File::delete(public_path($category->image));
+            if ($sub_category && File::exists(public_path($sub_category->image))) {
+                File::delete(public_path($sub_category->image));
             }
 
             $file = request()->file('image');
             $fileName = hexdec(uniqid()) . '.' . $file->getClientOriginalExtension(); //for name making
-            $file->move(public_path('/uploads/category'), $fileName);
-            $filePath = "uploads/category/{$fileName}";
+            $file->move(public_path('/uploads/subCategory/'), $fileName);
+            $filePath = "uploads/subCategory/{$fileName}";
 
-            Category::where('slug', $slug)->update([
+            SubCategory::where('slug', $slug)->update([
                 'name' => $request->name,
                 'slug' => Str::slug($request->name),
                 'image' => $filePath,
+                'category_id' => $request->category_id,
+
             ]);
 
-            toastr()->success('Category updated with image');
-            return redirect()->route('category.index');
+            toastr()->success('Sub Category updated with image');
+            return redirect()->route('sub-category.index');
 
         }
 
-        Category::where('slug', $slug)->update([
+        SubCategory::where('slug', $slug)->update([
             'name' => $request->name,
             'slug' => Str::slug($request->name),
+            'category_id' => $request->category_id,
 
         ]);
 
         // Display an error toast with no title
-        toastr()->success('Category updated without image');
-        return redirect()->route('category.index');
+        toastr()->success('Sub Category updated without image');
+        return redirect()->route('sub-category.index');
     }
 
 /**
@@ -123,19 +128,19 @@ class SubCategoryController extends Controller {public function index() {
 
         try {
 
-            $category = Category::where('slug', $slug)->first();
+            $sub_category = SubCategory::where('slug', $slug)->first();
 
-            $oldImagePath = public_path($category->image); // Get the full path to the old image
+            $oldImagePath = public_path($sub_category->image); // Get the full path to the old image
 
             if (file_exists($oldImagePath)) {
                 // Delete the old image
                 unlink($oldImagePath);
             }
 
-            Category::where('slug', $slug)->delete();
+            SubCategory::where('slug', $slug)->delete();
 
             toastr()->success('Category deleted');
-            return redirect()->route('category.index');
+            return redirect()->route('sub-category.index');
 
         } catch (Exception $e) {
             return "something went wrong";

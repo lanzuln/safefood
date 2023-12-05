@@ -33,16 +33,16 @@
                     <div class="card-body">
                         <form action="{{ route('sub-category.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+
                             <div class="form-group">
                                 <select class="form-select mb-3" aria-label="Default select example" name="category_id">
                                     <option selected="">Select category</option>
-
                                     @foreach ($allCategory as $item)
                                         <option value="{{ $item->id }}">{{ $item->name }}</option>
                                     @endforeach
-
                                 </select>
                             </div>
+
                             <div class="mb-3">
                                 <label class="form-label">Sub Category name</label>
                                 <input type="text" name="name"
@@ -51,6 +51,8 @@
                                     <span class="text-danger">{{ $message }}</span>
                                 @enderror
                             </div>
+
+
                             {{-- category image	 --}}
 
                             <div class="mb-3">
