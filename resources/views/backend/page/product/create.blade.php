@@ -4,9 +4,6 @@
 @endsection
 
 @push('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-        integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 
 @section('body')
@@ -18,8 +15,7 @@
                 <div class="col-6">
                     <h1>Create product</h1>
                     <div class="d-flex">
-                        <a href="{{ route('product.index') }}" class="btn btn-primary"><i
-                                class="fa-solid fa-angles-left"></i>
+                        <a href="{{ route('product.index') }}" class="btn btn-primary"><i class="fa-solid fa-angles-left"></i>
                             product list</a>
                     </div>
                 </div>
@@ -35,116 +31,139 @@
                     <div class="card-body">
                         <form action="{{ route('product.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
-                            <div class="mb-3">
-                                <label class="form-label">select category</label>
-                                <select class="form-select" aria-label="Default select example" name="category_id">
-                                    <option>Select</option>
-                                    @foreach ($category as $item)
-                                        <option value="{{ $item->id }}">{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Product title</label>
-                                <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror" value="" id="">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
                             <div class="row">
-                                <div class="col-md-6">
-                                    {{-- Product price  --}}
+                                <div class="col-md-8">
+                                    <!-- name  -->
                                     <div class="mb-3">
-                                        <label class="form-label">Product price</label>
-                                        <input type="number" name="product_price"
-                                            class="form-control @error('product_price') is-invalid @enderror" value=""
+                                        <label class="form-label">Product name</label>
+                                        <input type="text" name="name"
+                                            class="form-control @error('name') is-invalid @enderror" value=""
                                             id="">
-                                        @error('product_price')
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- Product code --}}
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Real price</label>
+                                                <input type="number" name="real_price"
+                                                    class="form-control @error('real_price') is-invalid @enderror"
+                                                    value="" id="">
+                                                @error('real_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Sale price</label>
+                                                <input type="number" name="sale_price"
+                                                    class="form-control @error('sale_price') is-invalid @enderror"
+                                                    value="" id="">
+                                                @error('sale_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" name="qty"
+                                                    class="form-control @error('qty') is-invalid @enderror" value=""
+                                                    id="">
+                                                @error('qty')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Weight</label>
+                                                <input type="number" name="weight"
+                                                    class="form-control @error('weight') is-invalid @enderror"
+                                                    value="" id="">
+                                                @error('weight')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Unique code</label>
+                                                <input type="text" name="u_code"
+                                                    class="form-control @error('u_code') is-invalid @enderror"
+                                                    value="" id="">
+                                                @error('u_code')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                    </div>
                                     <div class="mb-3">
-                                        <label class="form-label">Product code</label>
-                                        <input type="text" name="product_code"
-                                            class="form-control @error('product_code') is-invalid @enderror" value=""
-                                            id="">
-                                        @error('product_code')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <label class="form-label">Product short description</label>
+                                        <textarea name="short_desc" class="form-control" id="" cols="20" rows="5"></textarea>
+
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    {{-- Product price  --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Product stock</label>
-                                        <input type="number" name="product_stock"
-                                            class="form-control @error('product_stock') is-invalid @enderror" value=""
-                                            id="">
-                                        @error('product_stock')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <label class="form-label">Product long description</label>
+                                        <textarea name="long_desc" class="form-control" id="summernote" cols="20" rows="5"></textarea>
+
                                     </div>
+
                                 </div>
-                                <div class="col-md-6">
-                                    {{-- Product code --}}
+                                <div class="col-md-4">
                                     <div class="mb-3">
-                                        <label class="form-label">Alert quantity</label>
-                                        <input type="number" name="alert_quantity"
-                                            class="form-control @error('alert_quantity') is-invalid @enderror"
-                                            value="" id="" min="1">
-                                        @error('alert_quantity')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                        <label class="form-label">Select category</label>
+                                        <select name="category_id" id="category_id_select" class="form-select"
+                                            aria-label="Default select example">
+                                            <option>Select</option>
+                                            @foreach ($category as $item)
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Select sub category</label>
+                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select"
+                                            aria-label="Default select example">
+                                            <option value="">Select Category first</option>
+
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Product image</label>
+                                        <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])"
+                                            class="form-control" name="image" type="file" id="image">
+                                    </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+
+                                    <div class="mb-3">
+                                        <img class="" id="newImg" width="150">
+                                    </div>
+
+                                    {{-- multi image --}}
+                                    <div class="mb-3">
+                                        <label class="form-label">Product multi image</label>
+                                        <input class="form-control" name="multi_image[]" multiple type="file"
+                                            id="image">
+                                    </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+
+
                                 </div>
                             </div>
-                            {{-- Product Short description --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product Short description</label>
-                                <textarea name="short_desc" class="form-control" id="" cols="20" rows="5"></textarea>
 
-                            </div>
-                            {{-- Product long description --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product long description</label>
-                                <textarea name="long_desc" class="form-control" id="" cols="20" rows="5"></textarea>
 
-                            </div>
-                            {{-- Product Additional info --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product Additional info</label>
-                                <textarea name="addtional_info" class="form-control" id="" cols="20" rows="5"></textarea>
 
-                            </div>
-                            {{-- product image	 --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product image</label>
-                                <input type="file" name="product_image" class="form-control dropify" id="">
-                            </div>
-                            {{-- multi image	 --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product multi image</label>
-                                <input type="file" name="multi_images[]" multiple class="form-control"
-                                    id="multiImg">
-                            </div>
-
-                            {{-- <div class="mb-3" id="preview_img">
-
-                            </div> --}}
-
-                            <div class="mb-0">
-                                <div class="form-check form-switch mb-1">
-                                    <input type="checkbox" class="form-check-input" id="quantitySwitch2" checked="">
-                                    <label class="form-check-label" for="quantitySwitch2">Active or Inactive</label>
-                                </div>
-                            </div>
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-success">Create</button>
                             </div>
@@ -157,15 +176,40 @@
     </div>
 
     @push('script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
-            integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="{{ asset('backend/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
         <script>
             $(document).ready(function() {
-                $('.dropify').dropify();
+                $('#summernote').summernote({
+                    height: 300,
+                });
+
+                // sub category ajax call
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                $('#category_id_select').on('change', function() {
+                    var category_id_select = $(this).val();
+                    if (category_id_select) {
+                        $.ajax({
+                            url: "{{ url('/subcategory/ajax') }}/" + category_id_select,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                console.log(data)
+                                var d = $('#sub_category_id_select').empty();
+                                $.each(data, function(key, value) {
+                                    d.append('<option value="' + value.id +
+                                        '">' + value.name + '</option>');
+                                });
+                            },
+                        });
+                    }
+                    alert(error)
+                });
             });
-
-
         </script>
     @endpush
 @endsection

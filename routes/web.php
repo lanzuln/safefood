@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -17,6 +18,11 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
 
     // sub CATEGORY
     Route::resource('sub-category', SubCategoryController::class);
+    Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'loadSubcategory'])->name('load.subcategory');
+
+    // product
+    Route::resource('product', ProductController::class);
+
 });
 // Route::middleware('auth')->group(function () {
 //     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

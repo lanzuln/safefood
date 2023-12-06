@@ -41,13 +41,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col">SL no</th>
+                                    <th scope="col">Last update</th>
                                     <th scope="col">Image</th>
-                                    <th scope="col">Last Modified</th>
-                                    <th scope="col">Category Name</th>
                                     <th scope="col">Name</th>
                                     <th scope="col">Price</th>
-                                    <th scope="col">Stock/Alert</th>
-                                    <th scope="col">Rating</th>
+                                    <th scope="col">Discount</th>
+                                    <th scope="col">Stock</th>
                                     <th scope="col">Action</th>
                                 </tr>
                             </thead>
@@ -55,28 +54,29 @@
                                 @foreach ($product as $key => $item)
                                     <tr>
                                         <th>{{ $key + 1 }}</th>
-                                        <td><img src="{{asset($item->product_image?? "avator.png")}}" alt="" width="100"></td>
                                         <td>{{ $item->updated_at->format('d M Y') }}</td>
-                                        <td>{{ $item->category->title }}</td>
+                                        <td><img src="{{asset($item->image?? 'no-image.jpg')}}" alt="" width="100"></td>
                                         <td>{{ $item->name }}</td>
-                                        <td>{{ $item->product_price }}</td>
+                                        <td>{{ $item->real_price }}</td>
+                                        <td>{{ $item->sale_price }}</td>
+                                        <td>{{ $item->qty }}</td>
                                         <td>
-                                            <span class="badge bg-success">{{$item->product_stock}}</span>
-                                            <span class="badge bg-danger">{{$item->alert_quantity}}</span>
-                                        </td>
-                                        <td>{{ $item->rating }}</td>
-                                        <td>
-                                            <button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
-                                                    href="{{ route('product.edit', $item->slug) }}"
-                                                    class="text-white">Edit</a></button>
-                                            <form action="{{ route('product.destroy', $item->slug) }}" method="post"
-                                                id="deleteForm" >
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn btn-danger" id="delete"><i
-                                                        class="fa-solid fa-trash"></i> <a href=""
-                                                        class="text-white">Delete</a></button>
-                                            </form>
+                                            <span><button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
+                                                href="{{ route('product.edit', $item->slug) }}"
+                                                class="text-white">Edit</a></button>
+                                            </span>
+                                            <span>
+                                                <form action="{{ route('product.destroy', $item->slug) }}" method="post"
+                                                    id="deleteForm" >
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn btn-danger" id="delete"><i
+                                                            class="fa-solid fa-trash"></i> <a href=""
+                                                            class="text-white">Delete</a></button>
+                                                </form>
+                                            </span>
+
+
                                         </td>
                                     </tr>
                                 @endforeach

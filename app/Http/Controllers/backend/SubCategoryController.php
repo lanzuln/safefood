@@ -146,4 +146,14 @@ class SubCategoryController extends Controller {public function index() {
             return "something went wrong";
         }
     }
+
+
+
+
+    public function loadSubcategory($category_id)
+    {
+        $sub_category = SubCategory::where('category_id', $category_id)->get();
+        return response()->json($sub_category, 200);
+    }
+
 }

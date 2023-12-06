@@ -46,5 +46,25 @@
             </ul>
         </li>
 
+          {{-- product --}}
+          <li>
+            <a href="#Product">
+                <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+                <span class="label">Product</span>
+            </a>
+            <ul id="Product">
+                <li>
+                    <a href="{{route('product.index')}}">
+                        <span class="label">All Product</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{route('product.create')}}">
+                        <span class="label">Create Product</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+
     </ul>
 </div>

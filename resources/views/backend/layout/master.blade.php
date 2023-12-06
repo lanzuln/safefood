@@ -4,6 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Acorn Admin Template | @yield('page-title')</title>
     <meta name="description" content="Ecommerce Dashboard" />
@@ -17,8 +18,7 @@
     <meta name="msapplication-square70x70logo" content="{{ asset('backend/assets/img/favicon/mstile-70x70.png') }}" />
     <meta name="msapplication-square150x150logo"
         content="{{ asset('backend/assets/img/favicon/mstile-150x150.png') }}" />
-    <meta name="msapplication-wide310x150logo"
-        content="{{ asset('backend/assets/img/favicon/mstile-310x150.png') }}" />
+    <meta name="msapplication-wide310x150logo" content="{{ asset('backend/assets/img/favicon/mstile-310x150.png') }}" />
     <meta name="msapplication-square310x310logo"
         content="{{ asset('backend/assets/img/favicon/mstile-310x310.png') }}" />
     <!-- Favicon Tags End -->
@@ -36,7 +36,10 @@
     <!-- Template Base Styles Start -->
     <link rel="stylesheet" href="{{ asset('backend/assets/css/styles.css') }}" />
     <!-- Template Base Styles End -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css"
+    />
 
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
 
@@ -77,6 +80,7 @@
     <script src="{{ asset('backend/assets/js/base/settings.js') }}"></script>
     <script src="{{ asset('backend/assets/js/base/init.js') }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/js/all.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.js"></script>
     <!-- Template Base Scripts End -->
 
     <!-- Page Specific Scripts Start -->
@@ -84,6 +88,9 @@
     <script src="{{ asset('backend/assets/js/common.js') }}"></script>
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <!-- Page Specific Scripts End -->
+    <script>
+
+    </script>
 
 </body>
 
