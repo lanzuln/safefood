@@ -4,7 +4,7 @@
 
 <head>
     <meta charset="UTF-8" />
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    {{-- <meta name="csrf-token" content="{{ csrf_token() }}"> --}}
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
     <title>Acorn Admin Template | @yield('page-title')</title>
     <meta name="description" content="Ecommerce Dashboard" />
@@ -38,10 +38,10 @@
     <!-- Template Base Styles End -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
 
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
+
 
     @stack('style')
 </head>
@@ -65,10 +65,10 @@
     <!-- Search Modal Start -->
     @include('backend.component.search')
     <!-- Search Modal End -->
+    <script src="{{ asset('backend/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
 
     <!-- Vendor Scripts Start -->
-    <script src="{{ asset('backend/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
-    <script src="{{ asset('backend/assets/js/vendor/bootstrap.bundle.min.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
     <!-- Vendor Scripts End -->
 
@@ -88,9 +88,7 @@
     <script src="{{ asset('backend/assets/js/common.js') }}"></script>
     <script src="{{ asset('backend/assets/js/scripts.js') }}"></script>
     <!-- Page Specific Scripts End -->
-    <script>
-
-    </script>
+    <script></script>
 
 </body>
 

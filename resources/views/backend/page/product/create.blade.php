@@ -118,8 +118,7 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label class="form-label">Select category</label>
-                                        <select name="category_id" id="category_id_select" class="form-select"
-                                            aria-label="Default select example">
+                                        <select name="category_id" id="category_id_select" class="form-select">
                                             <option>Select</option>
                                             @foreach ($category as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -129,9 +128,8 @@
 
                                     <div class="mb-3">
                                         <label class="form-label">Select sub category</label>
-                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select"
-                                            aria-label="Default select example">
-                                            <option value="">Select Category first</option>
+                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select">
+                                            <option>Select Category first</option>
 
                                         </select>
                                     </div>
@@ -176,7 +174,6 @@
     </div>
 
     @push('script')
-        <script src="{{ asset('backend/assets/js/vendor/jquery-3.5.1.min.js') }}"></script>
         <script>
             $(document).ready(function() {
                 $('#summernote').summernote({
@@ -184,17 +181,13 @@
                 });
 
                 // sub category ajax call
-                $.ajaxSetup({
-                    headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                    }
-                });
+
 
                 $('#category_id_select').on('change', function() {
                     var category_id_select = $(this).val();
                     if (category_id_select) {
                         $.ajax({
-                            url: "{{ url('/subcategory/ajax') }}/" + category_id_select,
+                            url: "{{ url('admin/subcategory/ajax') }}/" + category_id_select,
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
@@ -207,7 +200,6 @@
                             },
                         });
                     }
-                    alert(error)
                 });
             });
         </script>

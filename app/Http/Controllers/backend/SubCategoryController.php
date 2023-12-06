@@ -152,8 +152,8 @@ class SubCategoryController extends Controller {public function index() {
 
     public function loadSubcategory($category_id)
     {
-        $sub_category = SubCategory::where('category_id', $category_id)->get();
-        return response()->json($sub_category, 200);
+        $sub_category = SubCategory::where('category_id', $category_id)->orderBy('name','ASC')->get();
+        return json_encode($sub_category);
     }
 
 }

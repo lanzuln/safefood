@@ -18,7 +18,7 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
 
     // sub CATEGORY
     Route::resource('sub-category', SubCategoryController::class);
-    Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'loadSubcategory'])->name('load.subcategory');
+    Route::get('/subcategory/ajax/{category_id}', [SubCategoryController::class, 'loadSubcategory']);
 
     // product
     Route::resource('product', ProductController::class);
