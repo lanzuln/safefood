@@ -34,12 +34,12 @@
 
     <!-- Vendor Styles End -->
     <!-- Template Base Styles Start -->
-    <link rel="stylesheet" href="{{ asset('backend/assets/css/styles.css') }}" />
     <!-- Template Base Styles End -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" />
 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.20/summernote-bs5.min.css" />
 
+    <link rel="stylesheet" href="{{ asset('backend/assets/css/styles.css') }}" />
     <link rel="stylesheet" href="{{ asset('backend/assets/css/main.css') }}" />
 
 

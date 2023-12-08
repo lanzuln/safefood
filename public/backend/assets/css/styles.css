@@ -10,7 +10,7 @@ Table of Contents
 |   \-- sizes
 |   \-- positions
 |   \-- shared
-|   
+|
 +-- themes
 |   |
 |   \-- rest
@@ -24,7 +24,7 @@ Table of Contents
 |   \-- light.red
 |   \-- light.purple
 |   \-- light.pink
-|   
+|
 +-- bootstrap
 |   |
 |   \-- accordion
@@ -48,7 +48,7 @@ Table of Contents
 |   \-- tables
 |   \-- toast
 |   \-- tooltip
-|   
+|
 +-- plugins
 |   |
 |   \-- autocomplete
@@ -76,7 +76,7 @@ Table of Contents
 |   \-- tour
 |   \-- validation
 |   \-- wizard
-|   
+|
 +-- layout
     |
     \-- base
@@ -87,7 +87,7 @@ Table of Contents
     \-- footer
     \-- print
     \-- settings
- 
+
 */
 /*
 *
@@ -10675,8 +10675,8 @@ div.error {
 .was-validated .custom-select:invalid,
 .custom-select.is-invalid,
 .was-validated .custom-select:valid,
-.custom-select.is-valid {
-  background-image: initial; }
+/* .custom-select.is-valid {
+  background-image: initial; } */
 
 .tooltip-end-top .filled .invalid-tooltip,
 .tooltip-end-top .filled .valid-tooltip,

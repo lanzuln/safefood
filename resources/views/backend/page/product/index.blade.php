@@ -61,11 +61,11 @@
                                         <td>{{ $item->sale_price }}</td>
                                         <td>{{ $item->qty }}</td>
                                         <td>
-                                            <span><button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
-                                                href="{{ route('product.edit', $item->slug) }}"
+                                            <span style="display: inline-block"><button class="btn btn-info"><i class="fa-solid fa-pen-to-square"></i> <a
+                                                href="{{ route('product.edit', $item->id) }}"
                                                 class="text-white">Edit</a></button>
                                             </span>
-                                            <span>
+                                            <span style="display: inline-block">
                                                 <form action="{{ route('product.destroy', $item->slug) }}" method="post"
                                                     id="deleteForm" >
                                                     @csrf

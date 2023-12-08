@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('milti_images', function (Blueprint $table) {
            $table->id();
            $table->foreignId('product_id')->constrained('products')->onDelete('cascade');
-           $table->string('multi_image');
+           $table->string('multi_image')->nullable();
            $table->timestamp('created_at')->useCurrent();
            $table->timestamp('updated_at')->useCurrent()->useCurrentOnUpdate();
         });

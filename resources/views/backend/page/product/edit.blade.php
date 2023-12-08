@@ -4,9 +4,6 @@
 @endsection
 
 @push('style')
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/css/dropify.min.css"
-        integrity="sha512-EZSUkJWTjzDlspOoPSpUFR0o0Xy7jdzW//6qhUkoZ9c4StFkVsp9fbbd0O06p9ELS3H486m4wmrCELjza4JEog=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
 @endpush
 
 @section('body')
@@ -16,10 +13,9 @@
             <div class="row">
                 <!-- Title Start -->
                 <div class="col-6">
-                    <h1>Edit product</h1>
+                    <h1>Update product</h1>
                     <div class="d-flex">
-                        <a href="{{ route('product.index') }}" class="btn btn-primary"><i
-                                class="fa-solid fa-angles-left"></i>
+                        <a href="{{ route('product.index') }}" class="btn btn-primary"><i class="fa-solid fa-angles-left"></i>
                             product list</a>
                     </div>
                 </div>
@@ -33,112 +29,152 @@
             <div class="col-12 mb-5">
                 <div class="card">
                     <div class="card-body">
-                        <form action="{{ route('product.update', $product->slug) }}" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('product.update', $product->id) }}" method="post">
                             @csrf
                             @method('PUT')
-                            <div class="mb-3">
-                                <label class="form-label">select category</label>
-                                <select class="form-select" aria-label="Default select example" name="category_id">
-                                    @foreach ($category as $item)
-                                        <option value="{{ $item->id }}" @if ($product->Category_id === $item->id)
-                                            selected
-                                        @endif>{{ $item->title }}</option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            <div class="mb-3">
-                                <label class="form-label">Product title</label>
-                                <input type="text" name="name"
-                                    class="form-control @error('name') is-invalid @enderror" value="{{$product->name}}" id="">
-                                @error('name')
-                                    <span class="text-danger">{{ $message }}</span>
-                                @enderror
-                            </div>
+                            <input type="hidden" name="{{$product->id}}">
+
                             <div class="row">
-                                <div class="col-md-6">
-                                    {{-- Product price  --}}
+                                <div class="col-md-8">
+                                    <!-- name  -->
                                     <div class="mb-3">
-                                        <label class="form-label">Product price</label>
-                                        <input type="number" name="product_price"
-                                            class="form-control @error('product_price') is-invalid @enderror" value="{{$product->product_price}}"
-                                            id="">
-                                        @error('product_price')
+                                        <label class="form-label">Product name</label>
+                                        <input type="text" name="name"
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ $product->name }}" id="">
+                                        @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- Product code --}}
-                                    <div class="mb-3">
-                                        <label class="form-label">Product code</label>
-                                        <input type="text" name="product_code"
-                                            class="form-control @error('product_code') is-invalid @enderror" value="{{$product->product_code}}"
-                                            id="">
-                                        @error('product_code')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Real price</label>
+                                                <input type="number" name="real_price"
+                                                    class="form-control @error('real_price') is-invalid @enderror"
+                                                    value="{{ $product->real_price }}" id="">
+                                                @error('real_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="mb-3">
+                                                <label class="form-label">Sale price</label>
+                                                <input type="number" name="sale_price"
+                                                    class="form-control @error('sale_price') is-invalid @enderror"
+                                                    value="{{ $product->sale_price }}" id="">
+                                                @error('sale_price')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    {{-- Product price  --}}
-                                    <div class="mb-3">
-                                        <label class="form-label">Product stock</label>
-                                        <input type="number" name="product_stock"
-                                            class="form-control @error('product_stock') is-invalid @enderror" value="{{$product->product_stock}}"
-                                            id="">
-                                        @error('product_stock')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Quantity</label>
+                                                <input type="number" name="qty"
+                                                    class="form-control @error('qty') is-invalid @enderror"
+                                                    value="{{ $product->qty }}" id="">
+                                                @error('qty')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Weight</label>
+                                                <input type="number" name="weight"
+                                                    class="form-control @error('weight') is-invalid @enderror"
+                                                    value="{{ $product->weight }}" id="">
+                                                @error('weight')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="mb-3">
+                                                <label class="form-label">Unique code</label>
+                                                <input type="text" name="u_code"
+                                                    class="form-control @error('u_code') is-invalid @enderror"
+                                                    value="{{ $product->u_code }}" id="">
+                                                @error('u_code')
+                                                    <span class="text-danger">{{ $message }}</span>
+                                                @enderror
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="col-md-6">
-                                    {{-- Product code --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Alert quantity</label>
-                                        <input type="number" name="alert_quantity"
-                                            class="form-control @error('alert_quantity') is-invalid @enderror"
-                                            value="{{$product->alert_quantity}}" id="" min="1">
-                                        @error('alert_quantity')
-                                            <span class="text-danger">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-                            </div>
-                            {{-- Product Short description --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product Short description</label>
-                                <textarea name="short_desc" class="form-control" id="" cols="20" rows="5">{{$product->short_desc}}</textarea>
+                                        <label class="form-label">Product short description</label>
+                                        <textarea name="short_desc" class="form-control" id="" cols="20" rows="5">{{ $product->short_desc }}</textarea>
 
-                            </div>
-                            {{-- Product long description --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product long description</label>
-                                <textarea name="long_desc" class="form-control" id="" cols="20" rows="5">{{$product->long_desc}}</textarea>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Product long description</label>
+                                        <textarea name="long_desc" class="form-control" id="summernote" cols="20" rows="5">{{ $product->long_desc }}</textarea>
 
-                            </div>
-                            {{-- Product Additional info --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product Additional info</label>
-                                <textarea name="addtional_info" class="form-control" id="" cols="20" rows="5">{{$product->addtional_info}}</textarea>
+                                    </div>
 
-                            </div>
-                            {{-- category image	 --}}
-                            <div class="mb-3">
-                                <label class="form-label">Product image</label>
-                                <input type="file" name="product_image" class="form-control dropify" id="" data-default-file="{{asset($product->product_image?? "avator.png")}}">
-                            </div>
-                             <div class="mb-0">
-                                <div class="form-check form-switch mb-1">
-                                    <input type="checkbox" name="is_active" class="form-check-input" id="quantitySwitch2"
-                                    @if ($product->is_active)
-                                        checked
-                                    @endif>
-                                    <label class="form-check-label" for="quantitySwitch2">Active or Inactive</label>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="mb-3">
+                                        <label class="form-label">Select category</label>
+                                        <select name="category_id" id="category_id_select" class="form-select"
+                                            value="{{ old('category_id') }}">
+
+                                            <option>Select</option>
+                                            @foreach ($category as $item)
+                                                <option value="{{ $item->id }}"
+                                                    @if ($item->id == $product->category_id) selected @endif>{{ $item->name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label class="form-label">Select sub category</label>
+                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select"
+                                            value="{{ old('sub_category_id') }}">
+                                            <option>Select Category first</option>
+
+                                            @foreach ($sub_category as $item)
+                                                <option value="{{ $item->id }}"
+                                                    @if ($item->id == $product->sub_category_id) selected @endif>{{ $item->name }}
+                                                </option>
+                                            @endforeach
+
+                                        </select>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label class="form-label">Product image</label>
+                                        <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])"
+                                            class="form-control" name="image" type="file">
+                                    </div>
+                                    @error('image')
+                                        <span class="text-danger">{{ $message }}</span>
+                                    @enderror
+
+                                    <div class="mb-3">
+                                        <img class="" id="newImg" width="150">
+                                    </div>
+
+                                    {{-- multi image --}}
+                                    <div class="mb-3">
+                                        <label for="inputProductTitle" class="form-label">Main Thumbnail</label>
+                                        <input oninput="displayThumbnails(this)" class="form-control"
+                                            name="multi_image[]" multiple="" type="file">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <div id="thumbnailContainer"></div>
+                                    </div>
+
                                 </div>
                             </div>
+
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-success">Create</button>
                             </div>
@@ -151,12 +187,33 @@
     </div>
 
     @push('script')
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/Dropify/0.2.2/js/dropify.min.js"
-            integrity="sha512-8QFTrG0oeOiyWo/VM9Y8kgxdlCryqhIxVeRpWSezdRRAvarxVtwLnGroJgnVW9/XBRduxO/z1GblzPrMQoeuew=="
-            crossorigin="anonymous" referrerpolicy="no-referrer"></script>
         <script>
             $(document).ready(function() {
-                $('.dropify').dropify();
+                $('#summernote').summernote({
+                    height: 300,
+                });
+
+                // sub category ajax call
+
+
+                $('#category_id_select').on('change', function() {
+                    var category_id_select = $(this).val();
+                    if (category_id_select) {
+                        $.ajax({
+                            url: "{{ url('admin/subcategory/ajax') }}/" + category_id_select,
+                            type: "GET",
+                            dataType: "json",
+                            success: function(data) {
+                                console.log(data)
+                                var d = $('#sub_category_id_select').empty();
+                                $.each(data, function(key, value) {
+                                    d.append('<option value="' + value.id +
+                                        '">' + value.name + '</option>');
+                                });
+                            },
+                        });
+                    }
+                });
             });
         </script>
     @endpush

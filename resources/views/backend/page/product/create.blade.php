@@ -38,8 +38,8 @@
                                     <div class="mb-3">
                                         <label class="form-label">Product name</label>
                                         <input type="text" name="name"
-                                            class="form-control @error('name') is-invalid @enderror" value=""
-                                            id="">
+                                            class="form-control @error('name') is-invalid @enderror"
+                                            value="{{ old('name') }}" id="">
                                         @error('name')
                                             <span class="text-danger">{{ $message }}</span>
                                         @enderror
@@ -50,7 +50,7 @@
                                                 <label class="form-label">Real price</label>
                                                 <input type="number" name="real_price"
                                                     class="form-control @error('real_price') is-invalid @enderror"
-                                                    value="" id="">
+                                                    value="{{ old('real_price') }}" id="">
                                                 @error('real_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -61,7 +61,7 @@
                                                 <label class="form-label">Sale price</label>
                                                 <input type="number" name="sale_price"
                                                     class="form-control @error('sale_price') is-invalid @enderror"
-                                                    value="" id="">
+                                                    value="{{ old('sale_price') }}" id="">
                                                 @error('sale_price')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -73,8 +73,8 @@
                                             <div class="mb-3">
                                                 <label class="form-label">Quantity</label>
                                                 <input type="number" name="qty"
-                                                    class="form-control @error('qty') is-invalid @enderror" value=""
-                                                    id="">
+                                                    class="form-control @error('qty') is-invalid @enderror"
+                                                    value="{{ old('qty') }}" id="">
                                                 @error('qty')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -85,7 +85,7 @@
                                                 <label class="form-label">Weight</label>
                                                 <input type="number" name="weight"
                                                     class="form-control @error('weight') is-invalid @enderror"
-                                                    value="" id="">
+                                                    value="{{ old('weight') }}" id="">
                                                 @error('weight')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -96,7 +96,7 @@
                                                 <label class="form-label">Unique code</label>
                                                 <input type="text" name="u_code"
                                                     class="form-control @error('u_code') is-invalid @enderror"
-                                                    value="" id="">
+                                                    value="{{ old('u_code') }}" id="">
                                                 @error('u_code')
                                                     <span class="text-danger">{{ $message }}</span>
                                                 @enderror
@@ -105,12 +105,12 @@
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Product short description</label>
-                                        <textarea name="short_desc" class="form-control" id="" cols="20" rows="5"></textarea>
+                                        <textarea name="short_desc" class="form-control" id="" cols="20" rows="5">{{ old('short_desc') }}</textarea>
 
                                     </div>
                                     <div class="mb-3">
                                         <label class="form-label">Product long description</label>
-                                        <textarea name="long_desc" class="form-control" id="summernote" cols="20" rows="5"></textarea>
+                                        <textarea name="long_desc" class="form-control" id="summernote" cols="20" rows="5">{{ old('long_desc') }}</textarea>
 
                                     </div>
 
@@ -118,17 +118,26 @@
                                 <div class="col-md-4">
                                     <div class="mb-3">
                                         <label class="form-label">Select category</label>
-                                        <select name="category_id" id="category_id_select" class="form-select">
+                                        <select name="category_id" id="category_id_select"
+                                            class="form-select @error('category_id') is-invalid @enderror"
+                                            value="{{ old('category_id') }}">
+
+                                            @error('category_id')
+                                                <span class="text-danger">{{ $message }}</span>
+                                            @enderror
+
                                             <option>Select</option>
                                             @foreach ($category as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endforeach
+
                                         </select>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label">Select sub category</label>
-                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select">
+                                        <select name="sub_category_id" id="sub_category_id_select" class="form-select"
+                                            value="{{ old('sub_category_id') }}">
                                             <option>Select Category first</option>
 
                                         </select>
@@ -136,7 +145,7 @@
                                     <div class="mb-3">
                                         <label class="form-label">Product image</label>
                                         <input oninput="newImg.src=window.URL.createObjectURL(this.files[0])"
-                                            class="form-control" name="image" type="file" id="image">
+                                            class="form-control" name="image" type="file">
                                     </div>
                                     @error('image')
                                         <span class="text-danger">{{ $message }}</span>
@@ -148,19 +157,17 @@
 
                                     {{-- multi image --}}
                                     <div class="mb-3">
-                                        <label class="form-label">Product multi image</label>
-                                        <input class="form-control" name="multi_image[]" multiple type="file"
-                                            id="image">
+                                        <label for="inputProductTitle" class="form-label">Main Thumbnail</label>
+                                        <input oninput="displayThumbnails(this)" class="form-control"
+                                            name="multi_image[]" multiple="" type="file">
                                     </div>
-                                    @error('image')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
 
+                                    <div class="mb-3">
+                                        <div id="thumbnailContainer"></div>
+                                    </div>
 
                                 </div>
                             </div>
-
-
 
                             <div class="mt-5">
                                 <button type="submit" class="btn btn-success">Create</button>
@@ -174,6 +181,19 @@
     </div>
 
     @push('script')
+        <script>
+            function displayThumbnails(input) {
+                var thumbnailContainer = document.getElementById('thumbnailContainer');
+                thumbnailContainer.innerHTML = ''; // Clear previous thumbnails
+
+                for (var i = 0; i < input.files.length; i++) {
+                    var newImg = document.createElement('img');
+                    newImg.src = window.URL.createObjectURL(input.files[i]);
+                    newImg.width = 120;
+                    thumbnailContainer.appendChild(newImg);
+                }
+            }
+        </script>
         <script>
             $(document).ready(function() {
                 $('#summernote').summernote({
