@@ -1,10 +1,11 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\backend\SliderController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\DashboardController;
-use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
-use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin/')->middleware(['auth'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
@@ -30,7 +31,7 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
     });
 
     // slider
-    Route::resource('product', ProductController::class);
+    Route::resource('slider', SliderController::class);
 
 
 });
