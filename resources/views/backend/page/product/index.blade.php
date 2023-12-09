@@ -66,7 +66,7 @@
                                                 class="text-white">Edit</a></button>
                                             </span>
                                             <span style="display: inline-block">
-                                                <form action="{{ route('product.destroy', $item->slug) }}" method="post"
+                                                <form action="{{ route('product.destroy', $item->id) }}" method="post"
                                                     id="deleteForm" >
                                                     @csrf
                                                     @method('DELETE')

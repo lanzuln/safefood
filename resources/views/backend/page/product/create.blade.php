@@ -122,10 +122,6 @@
                                             class="form-select @error('category_id') is-invalid @enderror"
                                             value="{{ old('category_id') }}">
 
-                                            @error('category_id')
-                                                <span class="text-danger">{{ $message }}</span>
-                                            @enderror
-
                                             <option>Select</option>
                                             @foreach ($category as $item)
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -139,6 +135,8 @@
                                         <select name="sub_category_id" id="sub_category_id_select" class="form-select"
                                             value="{{ old('sub_category_id') }}">
                                             <option>Select Category first</option>
+
+
 
                                         </select>
                                     </div>
@@ -211,11 +209,10 @@
                             type: "GET",
                             dataType: "json",
                             success: function(data) {
-                                console.log(data)
+
                                 var d = $('#sub_category_id_select').empty();
                                 $.each(data, function(key, value) {
-                                    d.append('<option value="' + value.id +
-                                        '">' + value.name + '</option>');
+                                    d.append('<option value="' + value.id + '">' + value.name + '</option>');
                                 });
                             },
                         });

@@ -1,10 +1,10 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\DashboardController;
+use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use Illuminate\Support\Facades\Route;
 
 Route::prefix('admin/')->middleware(['auth'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
@@ -22,6 +22,16 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
 
     // product
     Route::resource('product', ProductController::class);
+
+    Route::controller(ProductController::class)->group(function () {
+        Route::post('/update/thambnail', 'UpdateThambnail')->name('update.thambnail');
+        Route::post('/update/multiimage', 'UpdateMultiimage')->name('update.multiimage');
+        Route::get('/multiimg/delete/{id}', 'MulitImageDelelte')->name('multiimg.delete');
+    });
+
+    // slider
+    Route::resource('product', ProductController::class);
+
 
 });
 // Route::middleware('auth')->group(function () {
