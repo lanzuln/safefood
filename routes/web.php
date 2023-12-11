@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
+use App\Http\Controllers\FrontendAboutController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\ProductController;
 use App\Http\Controllers\backend\ServiceController;
@@ -11,7 +12,6 @@ use App\Http\Controllers\Backend\SubCategoryController;
 
 // frontend
 Route::get('/', [HomeController::class, 'index']);
-
 
 Route::prefix('admin/')->middleware(['auth'])->group(function () {
     Route::controller(DashboardController::class)->group(function () {
@@ -39,9 +39,11 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
     // slider
     Route::resource('slider', SliderController::class);
 
-       // service
-       Route::resource('service', ServiceController::class);
+    // service
+    Route::resource('service', ServiceController::class);
 
+    Route::get('/frontend/about', [FrontendAboutController::class, 'fontendAbout'])->name('fontendAbout');
+    Route::post('update/frontend/about', [FrontendAboutController::class, 'updateFontendAbout'])->name('updateFontendAbout');
 
 });
 // Route::middleware('auth')->group(function () {

@@ -155,7 +155,7 @@
 
                                     {{-- multi image --}}
                                     <div class="mb-3">
-                                        <label for="inputProductTitle" class="form-label">Main Thumbnail</label>
+                                        <label for="inputProductTitle" class="form-label">Multi Image</label>
                                         <input oninput="displayThumbnails(this)" class="form-control"
                                             name="multi_image[]" multiple="" type="file">
                                     </div>

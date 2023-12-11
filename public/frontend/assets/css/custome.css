@@ -1,12 +1,4 @@
 
-
-
-.services__card:hover {
-    -webkit-transform: translateY(-15px);
-    transform: translateY(-15px);
-    -webkit-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16);
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.16);
-}
 .services__card:hover .services_icon {
     opacity: 1;
     visibility: visible;

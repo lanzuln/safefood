@@ -65,8 +65,8 @@
                 </li>
             </ul>
         </li>
-         {{-- slider --}}
-         <li>
+        {{-- slider --}}
+        <li>
             <a href="#slider">
                 <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
                 <span class="label">Slider</span>
@@ -84,25 +84,40 @@
                 </li>
             </ul>
         </li>
-            {{-- services --}}
-            <li>
-                <a href="#slider">
-                    <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
-                    <span class="label">services</span>
-                </a>
-                <ul id="slider">
-                    <li>
-                        <a href="{{ route('service.index') }}">
-                            <span class="label">All services</span>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ route('service.create') }}">
-                            <span class="label">Create services</span>
-                        </a>
-                    </li>
-                </ul>
-            </li>
+        {{-- services --}}
+        <li>
+            <a href="#services">
+                <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+                <span class="label">services</span>
+            </a>
+            <ul id="services">
+                <li>
+                    <a href="{{ route('service.index') }}">
+                        <span class="label">All services</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ route('service.create') }}">
+                        <span class="label">Create services</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
+        <li>Home Section</li>
+        {{-- Home --}}
+        <li>
+            <a href="#home">
+                <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+                <span class="label">Home</span>
+            </a>
+            <ul id="home">
+                <li>
+                    <a href="{{ route('fontendAbout') }}">
+                        <span class="label">Edit About</span>
+                    </a>
+                </li>
+            </ul>
+        </li>
 
     </ul>
 </div>
