@@ -84,6 +84,25 @@
                 </li>
             </ul>
         </li>
+            {{-- services --}}
+            <li>
+                <a href="#slider">
+                    <i data-cs-icon="cupcake" class="icon" data-cs-size="18"></i>
+                    <span class="label">services</span>
+                </a>
+                <ul id="slider">
+                    <li>
+                        <a href="{{ route('service.index') }}">
+                            <span class="label">All services</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="{{ route('service.create') }}">
+                            <span class="label">Create services</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
 
     </ul>
 </div>

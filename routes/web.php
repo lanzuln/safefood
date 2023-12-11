@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\frontend\HomeController;
 use App\Http\Controllers\backend\SliderController;
 use App\Http\Controllers\backend\ProductController;
+use App\Http\Controllers\backend\ServiceController;
 use App\Http\Controllers\backend\CategoryController;
 use App\Http\Controllers\backend\DashboardController;
 use App\Http\Controllers\Backend\SubCategoryController;
@@ -37,6 +38,9 @@ Route::prefix('admin/')->middleware(['auth'])->group(function () {
 
     // slider
     Route::resource('slider', SliderController::class);
+
+       // service
+       Route::resource('service', ServiceController::class);
 
 
 });

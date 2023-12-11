@@ -20,6 +20,7 @@
 
     <!-- Custom Style CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/style.css') }}">
+    <link rel="stylesheet" href="{{ asset('frontend/assets/css/custome.css') }}">
 </head>
 
 <body>
